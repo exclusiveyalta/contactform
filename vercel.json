@@ -1,13 +1,7 @@
 {
     "functions": {
-        "api/phpmailer/src/PHPMailer.php": {
+        "api/*.php": {
             "runtime": "vercel-php@0.4.0"
         }
-    },
-    "routes": [
-        {
-            "src": "/",
-            "dest": "/sendmail.php"
-        }
-    ]
+    }
 }
