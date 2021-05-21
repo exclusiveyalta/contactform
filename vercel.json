@@ -1,6 +1,6 @@
 {
     "functions": {
-        "phpmailer/src/PHPMailer.php": {
+        "api/phpmailer/src/PHPMailer.php": {
             "runtime": "vercel-php@0.4.0"
         }
     },
