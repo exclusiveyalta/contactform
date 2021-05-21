@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="./styles/css/style.css">
+    <script src="/js/script.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form">
+            <form class="form__body" action="#" id="form">
+                <div class="form__about">
+                    <div class="form__title">Бесплатная консультация</div>
+                    <div class="form__text">Оставьте свои данные, и мы поможем Вам в выборе дизайна, материалов и т.д.
+                    </div>
+                </div>
+                <div class="form__item">
+                    <label class="form__label" for="formName" id="label">Имя*</label>
+                    <input class="form__input _req" id="formName" type="text" name="name">
+                </div>
+                <div class="form__item">
+                    <label class="form__label" for="formPhone" id="label">Номер телефона*</label>
+                    <input class="form__input _req _phone" id="formPhone" type="tel" name="phone">
+                </div>
+                <div class="form__item">
+                    <label class="form__label" for="formEmail" id="label">Ваш Email</label>
+                    <input class="form__input _email" id="formEmail" type="text" name="email">
+                </div>
+                <div class="form__item">
+                    <label class="form__label" for="formMessage" id="label">Сообщение</label>
+                    <textarea class="form__input" name="message" id="formMessage"></textarea>
+                </div>
+                <div class="form__item">
+                    <div class="form__label">Прикрепить изображение</div>
+                    <div class="file">
+                        <div class="file__item">
+                            <input class="file__input" id="formImage" type="file" name="image"
+                                accept=".jpg, .jpeg, .png, .gif">
+                            <div class="file__button">Выбрать</div>
+                        </div>
+                        <div class="file__preview" id="formPreview"></div>
+                    </div>
+                </div>
+                <button class="btn btn--form" type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
