@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
             form.classList.add('_sending');
 
             // Fetch конструкция для отправки на почту:
-            let response = await fetch('sendmail.php', {
+            let response = await fetch('/sendmail', {
                 method: 'POST',
                 body: formData
             });
