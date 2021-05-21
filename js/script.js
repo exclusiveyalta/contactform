@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: 'POST',
                 body: formData
             });
+            console.log(response)
             if (response.ok) {
                 let result = await response.json();
                 alert(result.message);
