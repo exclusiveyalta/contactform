@@ -11,9 +11,9 @@ $mail->setLanguage('ru', 'phpmailer/language/');
 $mail->IsHTML(true);
 
 // От кого письмо
-$mail->setFrom ('danielyalta@yandex.ru', 'Сайт Best-shtory-yalta')
+$mail->setFrom ('danieldanyluch@gmail.com', 'Сайт Best-shtory-yalta')
 // Кому отправить
-$mail->addAddress('valeriayalta@yandex.ru');
+$mail->addAddress('danielyalta@yandex.ru');
 // Тема письма
 $mail->Subject = 'Из контактной формы на сайте'
 
