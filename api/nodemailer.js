@@ -23,13 +23,12 @@ async function mail({ name, phone, email, message, image }) {
 }
 
 let multiparty = require("multiparty");
-let http = require("http");
 let util = require("util");
 
 module.exports = async (req, res) => {
   if (req.method === "POST") {
     let form = new multiparty.Form();
-    form.parse(req, (err, fields, files) => {
+    form.parse(req, async (err, fields, files) => {
       const emailRes = await mail(fields);
       if (emailRes.messageId) {
         res.writeHead(200, { "content-type": "text/plain" });

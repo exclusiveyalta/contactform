@@ -16,6 +16,8 @@
   },
   "homepage": "https://github.com/vadimshvetsov/contactform#readme",
   "dependencies": {
-    "nodemailer": "^6.6.1"
+    "multiparty": "^4.2.2",
+    "nodemailer": "^6.6.1",
+    "util": "^0.12.3"
   }
 }
