@@ -10,13 +10,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-async function mail({ name, phone, email, message, image }) {
+async function mail({ name, phone, email, message }, files) {
   const emailOptions = {
     from: '"S_crappy PWNS 👻" <scrapwns@yandex.ru>', // sender address
     to: "scrapwns@gmail.com", // list of receivers
     subject: "ROFL ✔", // Subject line
     text: `MATE WTF? Name = ${name}, phone = ${phone}, email = ${email}, message = ${message}`, // plain text
     html: `MATE WTF? Name = ${name}, phone = ${phone}, email = ${email}, message = ${message}`, // html body
+    attachments: files,
   };
 
   // 3. This will send the email with the `emailOptions` above.
@@ -35,8 +36,8 @@ async function parseForm(req) {
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { fields } = await parseForm(req);
-    const emailRes = await mail(fields);
+    const { fields, files } = await parseForm(req);
+    const emailRes = await mail(fields, files);
 
     if (emailRes.messageId) {
       return res.status(200).json({ message: `Email sent successfuly` });
