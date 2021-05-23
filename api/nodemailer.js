@@ -24,18 +24,14 @@ async function mail({ name, phone, email, message, image }) {
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    // const emailRes = await mail(req.body);
+    console.log(req.body, JSON.stringify(req.body));
+    const emailRes = await mail(req.body);
 
-    // if (emailRes.messageId) {
-    // return res.status(200).json({ message: `Email sent successfuly` });
-    // }
+    if (emailRes.messageId) {
+      return res.status(200).json({ message: `Email sent successfuly` });
+    }
 
-    return (
-      res
-        .status(400)
-        // .json({ message: "Error sending email" });
-        .json({ message: JSON.stringify(req.body) })
-    );
+    return res.status(400).json({ message: "Error sending email" });
   }
 
   return res
