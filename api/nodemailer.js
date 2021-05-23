@@ -24,7 +24,7 @@ async function mail({ name, phone, email, message, image }) {
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    console.log(req.body, JSON.stringify(req.body));
+    console.log(req, JSON.stringify(req));
     const emailRes = await mail(req.body);
 
     if (emailRes.messageId) {
