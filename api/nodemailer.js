@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 
   async function mail() {
     const emailOptions = {
-      from: '"Fred Foo 👻" <foo@example.com>', // sender address
+      from: '"S_crappy PWNS 👻" <scrapwns@yandex.ru>', // sender address
       to: "scrapwns@gmail.com", // list of receivers
       subject: "Hello ✔", // Subject line
       text: "Hello world?", // plain text body
