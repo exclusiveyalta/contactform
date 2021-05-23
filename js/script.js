@@ -23,7 +23,12 @@ document.addEventListener("DOMContentLoaded", function () {
       // Fetch конструкция для отправки на почту:
       let response = await fetch("/mail", {
         method: "POST",
-        body: { name: "shit", email: "fuck", phone: "ass", message: "bitch" },
+        body: JSON.stringify({
+          name: "shit",
+          email: "fuck",
+          phone: "ass",
+          message: "bitch",
+        }),
       });
       if (response.ok) {
         // let result = await response.json();
