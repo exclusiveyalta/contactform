@@ -1,16 +1,13 @@
 {
-    "functions": {
-        "api/*.php": {
-            "runtime": "vercel-php@0.4.0"
-        },
-        "api/phpmailer/src/*.php": {
-            "runtime": "vercel-php@0.4.0"
-        }
-    },
-    "routes": [
-        {
-            "src": "/sendmail",
-            "dest": "/api/sendmail.php"
-        }
-    ]
+  "functions": {
+    "api/nodemailer.js": {
+      "runtime": "@vercel/node@1.10.0"
+    }
+  },
+  "routes": [
+    {
+      "src": "/mail",
+      "dest": "/api/nodemailer.js"
+    }
+  ]
 }
