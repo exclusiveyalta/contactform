@@ -17,7 +17,7 @@ async function mail({ name, phone, email, message }, files) {
     subject: "ROFL ✔", // Subject line
     text: `MATE WTF? Name = ${name}, phone = ${phone}, email = ${email}, message = ${message}`, // plain text
     html: `MATE WTF? Name = ${name}, phone = ${phone}, email = ${email}, message = ${message}`, // html body
-    attachments: files,
+    // attachments: files,
   };
 
   // 3. This will send the email with the `emailOptions` above.
