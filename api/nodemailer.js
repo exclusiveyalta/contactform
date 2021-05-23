@@ -17,7 +17,7 @@ export default async function handler(req, res) {
       from: '"S_crappy PWNS 👻" <scrapwns@yandex.ru>', // sender address
       to: "scrapwns@gmail.com", // list of receivers
       subject: "Hello ✔", // Subject line
-      text: "Hello world?", // plain text body
+      text: `Hello world? Name = ${name}, phone = ${phone}, email = ${email}, message = ${message}`, // plain text
       html: `<b>Hello world?</b> Name = ${name}, phone = ${phone}, email = ${email}, message = ${message}`, // html body
     };
 
