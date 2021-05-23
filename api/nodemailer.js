@@ -1,6 +1,5 @@
 "use strict";
 const nodemailer = require("nodemailer");
-const multiparty = require("multiparty");
 
 const transporter = nodemailer.createTransport({
   service: "Yandex",
@@ -23,21 +22,43 @@ async function mail({ name, phone, email, message, image }) {
   return transporter.sendMail(emailOptions);
 }
 
-export default async function handler(req, res) {
+let multiparty = require("multiparty");
+let http = require("http");
+let util = require("util");
+
+module.exports = async (req, res) => {
   if (req.method === "POST") {
-    const form = new multiparty.Form();
+    let form = new multiparty.Form();
     form.parse(req, (err, fields, files) => {
       const emailRes = await mail(fields);
-
       if (emailRes.messageId) {
-        return res.status(200).json({ message: `Email sent successfuly` });
+        res.writeHead(200, { "content-type": "text/plain" });
+        res.write("received upload: \n\n");
+        res.end(util.inspect({ fields: fields, files: files }));
+      } else {
+        return res.status(400).json({ message: "Error sending email" });
       }
-
-      return res.status(400).json({ message: "Error sending email" });
-    })
+    });
+    return;
+  } else {
+    res.writeHead(405, { "content-type": "text/plain" });
+    res.end("Method not allowed. Send a POST request.");
+    return;
   }
+};
 
-  return res
-    .status(400)
-    .json({ message: `Incorrect method: ${req.method}. Did you mean POST?` });
-}
+// export default async function handler(req, res) {
+// if (req.method === "POST") {
+// const emailRes = await mail(req.body);
+
+// if (emailRes.messageId) {
+// return res.status(200).json({ message: `Email sent successfuly` });
+// }
+
+// return res.status(400).json({ message: "Error sending email" });
+// }
+
+// return res
+// .status(400)
+// .json({ message: `Incorrect method: ${req.method}. Did you mean POST?` });
+// }
