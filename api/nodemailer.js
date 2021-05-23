@@ -13,9 +13,9 @@ async function mail({ name, phone, email, message, image }) {
   const emailOptions = {
     from: '"S_crappy PWNS 👻" <scrapwns@yandex.ru>', // sender address
     to: "scrapwns@gmail.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: `Hello world? Name = ${name}, phone = ${phone}, email = ${email}, message = ${message}`, // plain text
-    html: `<b>Hello world?</b> Name = ${name}, phone = ${phone}, email = ${email}, message = ${message}`, // html body
+    subject: "ROFL ✔", // Subject line
+    text: `MATE WTF? Name = ${name}, phone = ${phone}, email = ${email}, message = ${message}`, // plain text
+    html: `MATE WTF? Name = ${name}, phone = ${phone}, email = ${email}, message = ${message}`, // html body
   };
 
   // 3. This will send the email with the `emailOptions` above.
@@ -25,8 +25,6 @@ async function mail({ name, phone, email, message, image }) {
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const emailRes = await mail(req.body);
-
-    console.info(req.body, JSON.parse(req.body));
 
     if (emailRes.messageId) {
       return res.status(200).json({ message: `Email sent successfuly` });
