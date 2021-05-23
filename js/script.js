@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (error === 0) {
       form.classList.add("_sending");
 
+      console.log(formData);
+
       // Fetch конструкция для отправки на почту:
       let response = await fetch("/mail", {
         method: "POST",

@@ -25,7 +25,8 @@ async function mail({ name, phone, email, message, image }) {
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const emailRes = await mail(req.body);
-    console.log(req.body, JSON.parse(req.body));
+
+    console.info(req.body, JSON.parse(req.body));
 
     if (emailRes.messageId) {
       return res.status(200).json({ message: `Email sent successfuly` });
