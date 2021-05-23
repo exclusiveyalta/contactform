@@ -1,38 +1,46 @@
 "use strict";
 const nodemailer = require("nodemailer");
 
-// async..await is not allowed in global scope, must use a wrapper
-async function main() {
-  // Generate test SMTP service account from ethereal.email
-  // Only needed if you don't have a real mail account for testing
-  let testAccount = await nodemailer.createTestAccount();
+const transporter = nodemailer.createTransport({
+  // host: process.env.MAIL_HOST,
+  // port: 25,
+  // auth: {
+  // user: process.env.MAIL_USER,
+  // pass: process.env.MAIL_PASS,
+  // },
+  host: "smtp.ethereal.email",
+  port: 587,
+  secure: false, // true for 465, false for other ports
+  auth: {
+    user: testAccount.user, // generated ethereal user
+    pass: testAccount.pass, // generated ethereal password
+  },
+});
 
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: testAccount.user, // generated ethereal user
-      pass: testAccount.pass, // generated ethereal password
-    },
-  });
-
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
+async function sendEmail({ name, email }) {
+  const emailOptions = {
     from: '"Fred Foo 👻" <foo@example.com>', // sender address
     to: "scrapwns@gmail.com", // list of receivers
     subject: "Hello ✔", // Subject line
     text: "Hello world?", // plain text body
     html: "<b>Hello world?</b>", // html body
-  });
+  };
 
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-  // Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  // 3. This will send the email with the `emailOptions` above.
+  return transporter.sendMail(emailOptions);
 }
 
-main().catch(console.error);
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    const emailRes = await sendEmail(req.body);
+    if (emailRes.messageId) {
+      return res.status(200).json({ message: `Email sent successfuly` });
+    }
+
+    return res.status(400).json({ message: "Error sending email" });
+  }
+
+  return res
+    .status(400)
+    .json({ message: `Incorrect method: ${req.method}. Did you mean POST?` });
+}
