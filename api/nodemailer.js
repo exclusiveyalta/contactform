@@ -1,5 +1,6 @@
 "use strict";
 const nodemailer = require("nodemailer");
+const multiparty = require("multiparty");
 
 const transporter = nodemailer.createTransport({
   service: "Yandex",
@@ -24,14 +25,16 @@ async function mail({ name, phone, email, message, image }) {
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    console.log(req, JSON.stringify(req));
-    const emailRes = await mail(req.body);
+    const form = new multiparty.Form();
+    form.parse(req, (err, fields, files) => {
+      const emailRes = await mail(fields);
 
-    if (emailRes.messageId) {
-      return res.status(200).json({ message: `Email sent successfuly` });
-    }
+      if (emailRes.messageId) {
+        return res.status(200).json({ message: `Email sent successfuly` });
+      }
 
-    return res.status(400).json({ message: "Error sending email" });
+      return res.status(400).json({ message: "Error sending email" });
+    })
   }
 
   return res

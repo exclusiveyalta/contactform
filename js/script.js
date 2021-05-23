@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Fetch конструкция для отправки на почту:
       let response = await fetch("/mail", {
         method: "POST",
+        Accept: "application/json",
         body: formData,
       });
       if (response.ok) {
